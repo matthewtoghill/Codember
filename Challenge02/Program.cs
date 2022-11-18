@@ -11,21 +11,15 @@ public static class Program
 
         for (int i = 0; i < _input.Length; i++)
         {
-            switch (_input[i])
+            var len = _input[i] switch
             {
-                case '8':
-                case '9':
-                    message.Append((char)int.Parse(_input[i..(i + 2)]));
-                    i++;
-                    break;
-                case '1':
-                    message.Append((char)int.Parse(_input[i..(i + 3)]));
-                    i += 2;
-                    break;
-                default:
-                    message.Append(' ');
-                    break;
-            }
+                '8' or '9' => 2,
+                '1' => 3,
+                _ => 1
+            };
+
+            message.Append(len == 1 ? ' ' : (char)int.Parse(_input[i..(i + len)]));
+            i += len - 1;
         }
 
         Console.WriteLine(message);
