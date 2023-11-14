@@ -9,13 +9,14 @@ public class Program
         _input.ToList().ForEach(c => value = GetOperation(c).Invoke(value));
     }
 
-    public static Func<int, int> GetOperation(char command) =>
-        command switch
+    public static Func<int, int> GetOperation(char command)
+        => command switch
         {
             '#' => x => x + 1,
             '@' => x => x - 1,
             '*' => x => x * x,
-            '&' => x => { Console.Write(x); return x; }
+            '&' => x => { Console.Write(x); return x; },
+            _ => throw new ArgumentException()
         };
 }
 
